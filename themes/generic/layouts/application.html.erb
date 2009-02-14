@@ -7,10 +7,10 @@
     <title><%= cleanse(@page_title ? "#{@page_title} &raquo; " : "") %><%= SETTINGS.name %>: <%= SETTINGS.tagline %></title>
 
     <!-- Stylesheets, static -->
-    <%= theme_stylesheet_link_tag 'reset', :media => :all %>
+    <%= theme_stylesheet_link_tag 'reset-fonts-grids', :media => :all %>
     <%= stylesheet_link_tag 'common', :media => :all %>
-    <%= theme_stylesheet_link_tag 'typography', 'forms', 'layout', :media => :all, :cache => true %>
-    <%= theme_stylesheet_link_tag 'print', :media => :print %>
+    <%= theme_stylesheet_link_tag 'base-min', 'custom', :media => :all, :cache => true %>
+    <%#= theme_stylesheet_link_tag 'print', :media => :print %>
 
     <!-- Stylesheets, inserted  -->
     <%= yield :css_insert %>
