@@ -4,6 +4,9 @@ name: 'OurCalendar'
 # Site's tagline:
 tagline: 'A Generic Calendar Aggregator'
 
+# Site's tagline:
+tagline: 'My Calendar Aggregator'
+
 # Site's URL with trailing slash:
 url: 'http://change.me/'
 
