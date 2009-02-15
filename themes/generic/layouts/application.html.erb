@@ -33,36 +33,41 @@
   </head>
   <body>
 
-  <div id="outer">
-    <div id="global_header">
-      <a href="/" id="project_title"><%= SETTINGS.name %></a>
-
-      <div id="top_menu">
-         <div id='app_menu'>
+  <div id="doc3" class="yui-t7">
+    <div class="topping">
+      <div class="yui-g heading">
+        <div class="yui-u first titling">
+          <a href="/" id="project_title"><%= SETTINGS.name %></a>
+        </div>
+        <div class="yui-u searching">
+          <% form_tag '/events/search', :method => :get do %>
+            <div id='search_form'>
+            <label for="search_field">Search events</label>
+            <% if request.env["HTTP_USER_AGENT"] && request.env["HTTP_USER_AGENT"].include?("Safari") %>
+              <input type="search" name="query" value="<%= @query %>" results="5" id="search_field">
+            <% else %>
+              <%= text_field_tag 'query', @query, :id => 'search_field' %>
+            <% end %>
+            </div>
+          <% end -%>
+        </div>
+      </div>
+      <div class="menuing">
+        <div class="yui-g mainmenuing">
           <ul>
-              <li class='<%=link_class[:events]%>'><%= link_to "Events", events_path %></li>
-              <li class='<%=link_class[:venues]%>'><%= link_to "Venues", venues_path %></li>
+            <li><%= link_to "Events", events_path, :class => link_class[:events] %></li>
+            <li><%= link_to "Venues", venues_path, :class => link_class[:venues] %></li>
           </ul>
         </div>
-        <% form_tag '/events/search', :method => :get do %>
-          <div id='search_form'>
-          <label for="search_field">Search Events</label>
-          <% if request.env["HTTP_USER_AGENT"] && request.env["HTTP_USER_AGENT"].include?("Safari") %>
-            <input type="search" name="query" value="<%= @query %>" results="5" id="search_field">
-          <% else %>
-            <%= text_field_tag 'query', @query, :id => 'search_field' %>
-          <% end %>
-          </div>
-        <% end -%>
+        <div class="yui-g submenuing">
+          <!-- Sub-menu -->
+          <%= render(:partial => 'events/subnav') if link_class[:events] == 'active' %>
+          <%= render(:partial => 'venues/subnav') if link_class[:venues] == 'active' %>
+          <%= render(:partial => 'sources/subnav') if link_class[:import] == 'active' %>
+        </div>
       </div>
     </div>
-
-    <!-- Sub-menu -->
-    <%= render(:partial => 'events/subnav') if link_class[:events] == 'active' %>
-    <%= render(:partial => 'venues/subnav') if link_class[:venues] == 'active' %>
-    <%= render(:partial => 'sources/subnav') if link_class[:import] == 'active' %>
-
-    <div id="content">
+    <div id="content" class="yui-g">
       <!-- Notifications -->
       <%# Uncomment line below to see how flash messages are rendered: %>
       <%# flash[:success] = "yay"; flash[:failure] = "meh" %>
