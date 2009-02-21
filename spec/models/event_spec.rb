@@ -628,5 +628,22 @@ describe Event do
       @event.description.should == "foo\nbar"
     end
   end
+  
+  describe "when creating and fetching 'my events'" do
+    before(:each) do
+      @event = Event.new
+    end
+    
+    it "should handle an event with no 'my events'" do
+      @event.should_receive(:my_events).and_return([])
+      #@event.my_event_users_by_status.should == {'yes' => [], 'maybe' => [], 'no' => []}
+      @event.my_event_users_by_status.should == {} #hi
+    end
+    
+    it "should handle an event with many 'my events'" do
+      my_events = []
+      @event.should_receive(:my_events).and_return()
+    end
+  end
 
 end
